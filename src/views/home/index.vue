@@ -2,7 +2,8 @@
 import { reactive, ref } from 'vue'
 import HomeCategory from './components/HomeCategory.vue'
 import HomeBanner from './components/HomeBanner.vue'
-import HomePanel from './components/HomePanel.vue'
+import HomeNew from './components/HomeNew.vue'
+import HomeHot from './components/HomeHot.vue'
 </script>
 
 <template>
@@ -13,11 +14,10 @@ import HomePanel from './components/HomePanel.vue'
         <HomeCategory />
         <!-- banner轮播图 -->
         <HomeBanner />
-        <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
-          <template #right>
-            <XtxMore to="/" />
-          </template>
-        </HomePanel>
+        <!-- 面板组件 -->
+        <HomeNew />
+        <!-- 人气推荐 -->
+        <HomeHot />
       </div>
     </div>
   </div>

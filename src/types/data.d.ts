@@ -27,3 +27,17 @@ export type BannerItem = {
   imgUrl: string
   type: string
 }
+// 商品项
+export type GoodsItem = {
+  desc: string
+  id: string
+  name: string
+  picture: string
+  price: string
+}
+export type HotGoods = {
+  id: string
+  picture: string
+  title: string
+  alt: string
+}
