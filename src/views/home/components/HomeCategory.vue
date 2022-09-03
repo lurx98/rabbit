@@ -17,10 +17,22 @@ const goods = computed(() => {
         :class="{ active: categoryId === item.id }"
         @mouseenter="categoryId = item.id"
       >
-        <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
-        <RouterLink :to="`/category/sub/${sub.id}`" v-for="sub in item.children?.slice(0, 2)">
-          {{ sub.name }}
-        </RouterLink>
+        <template v-if="item.children">
+          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+          <RouterLink :to="`/category/sub/${sub.id}`" v-for="sub in item.children?.slice(0, 2)">
+            {{ sub.name }}
+          </RouterLink>
+        </template>
+        <template v-else>
+          <XtxSkeleton
+            :width="60"
+            :height="18"
+            style="margin-right: 5px"
+            bg="rgba(255,255,255,0.2)"
+            animated
+          />
+          <XtxSkeleton :width="50" :height="18" bg="rgba(255,255,255,0.2)" animated />
+        </template>
       </li>
     </ul>
     <div class="layer">

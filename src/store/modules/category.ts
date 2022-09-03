@@ -7,7 +7,6 @@ const defaultCategory = topCategory.map(item => {
     name: item
   }
 })
-console.log(defaultCategory)
 const useCategoryStore = defineStore('category', {
   state() {
     return {
