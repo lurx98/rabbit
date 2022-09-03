@@ -9,4 +9,12 @@ export type CategoryItem = {
   picture: string
   open: Boolean
   children: CategoryItem[]
+  goods: CategoryGoods[]
+}
+export type CategoryGoods = {
+  desc: string
+  id: string
+  name: string
+  picture: string
+  price: string
 }
