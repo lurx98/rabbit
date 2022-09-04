@@ -5,6 +5,7 @@ import HomeBanner from './components/HomeBanner.vue'
 import HomeNew from './components/HomeNew.vue'
 import HomeHot from './components/HomeHot.vue'
 import HomeBrand from './components/HomeBrand.vue'
+import HomeProduct from './components/HomeProduct.vue'
 </script>
 
 <template>
@@ -21,6 +22,8 @@ import HomeBrand from './components/HomeBrand.vue'
         <HomeHot />
         <!-- 热门品牌 -->
         <HomeBrand />
+        <!-- 商品区域 -->
+        <HomeProduct />
       </div>
     </div>
   </div>

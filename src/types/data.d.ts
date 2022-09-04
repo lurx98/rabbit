@@ -51,3 +51,22 @@ export type BrandItem = {
   desc: string
   place: string
 }
+export type HomeProduct = {
+  id: string
+  name: string
+  picture: string
+  saleInfo: string
+  children: {
+    id: string
+    name: string
+  }[]
+  goods: {
+    id: string
+    name: string
+    desc: string
+    price: string
+    picture: string
+    discount?: any
+    orderNum: number
+  }[]
+}
