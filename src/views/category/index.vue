@@ -2,6 +2,7 @@
 import { reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import useStore from '../../store/index'
+import GoodsItem from './components/GoodsItem.vue'
 const route = useRoute()
 const { category, home } = useStore()
 category.getTopCategory(route.params.id as string)
@@ -46,6 +47,17 @@ watchEffect(() => {
           </li>
         </ul>
       </div>
+      <!-- 分类关联商品 -->
+      <div class="ref-goods" v-for="item in category.topCategory.children" :key="item.id">
+        <div class="head">
+          <h3>- {{ item.name }} -</h3>
+          <p class="tag">温暖柔软，品质之选</p>
+          <XtxMore />
+        </div>
+        <div class="body">
+          <GoodsItem v-for="i in item.goods" :key="i.id" :goods="i" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +97,31 @@ watchEffect(() => {
           }
         }
       }
+    }
+  }
+  .ref-goods {
+    background-color: #fff;
+    margin-top: 20px;
+    position: relative;
+    .head {
+      .xtx-more {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      .tag {
+        text-align: center;
+        color: #999;
+        font-size: 20px;
+        position: relative;
+        top: -20px;
+      }
+    }
+    .body {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      padding: 0 65px 30px;
     }
   }
 }
