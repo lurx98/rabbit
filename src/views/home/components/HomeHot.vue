@@ -11,22 +11,24 @@ const target = useLazyData(() => {
 
 <template>
   <HomePanel ref="target" title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul ref="panel" class="goods-list" v-if="home.getHotList.length > 0">
-      <li v-for="item in home.hotGoodList" :key="item.id">
-        <RouterLink to="/">
-          <img v-lazy="item.picture" alt="" />
-          <p class="name">{{ item.title }}</p>
-          <p class="desc">{{ item.alt }}</p>
-        </RouterLink>
-      </li>
-    </ul>
-    <div class="home-skeleton" v-else>
-      <div class="item" v-for="i in 4" :key="i" :style="{ backgroundColor: '#f0f9f4' }">
-        <XtxSkeleton bg="#e4e4e4" :width="306" :height="306" />
-        <XtxSkeleton bg="#e4e4e4" :width="160" :height="24" />
-        <XtxSkeleton bg="#e4e4e4" :width="120" :height="24" />
+    <Transition name="fade">
+      <ul ref="panel" class="goods-list" v-if="home.hotGoodList.length > 0">
+        <li v-for="item in home.hotGoodList" :key="item.id">
+          <RouterLink to="/">
+            <img v-lazy="item.picture" alt="" />
+            <p class="name">{{ item.title }}</p>
+            <p class="desc">{{ item.alt }}</p>
+          </RouterLink>
+        </li>
+      </ul>
+      <div class="home-skeleton" v-else>
+        <div class="item" v-for="i in 4" :key="i" :style="{ backgroundColor: '#f0f9f4' }">
+          <XtxSkeleton bg="#e4e4e4" :width="306" :height="306" />
+          <XtxSkeleton bg="#e4e4e4" :width="160" :height="24" />
+          <XtxSkeleton bg="#e4e4e4" :width="120" :height="24" />
+        </div>
       </div>
-    </div>
+    </Transition>
   </HomePanel>
 </template>
 
@@ -53,17 +55,17 @@ const target = useLazyData(() => {
       font-size: 18px;
     }
   }
-  .home-skeleton {
-    width: 1240px;
-    height: 406px;
-    display: flex;
-    justify-content: space-between;
-    .item {
-      width: 306px;
-      .xtx-skeleton ~ .xtx-skeleton {
-        display: block;
-        margin: 16px auto 0;
-      }
+}
+.home-skeleton {
+  width: 1240px;
+  height: 406px;
+  display: flex;
+  justify-content: space-between;
+  .item {
+    width: 306px;
+    .xtx-skeleton ~ .xtx-skeleton {
+      display: block;
+      margin: 16px auto 0;
     }
   }
 }

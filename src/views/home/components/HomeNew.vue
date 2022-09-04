@@ -15,22 +15,24 @@ const target = useLazyData(() => {
     <HomePanel ref="target" title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
       <template #right><XtxMore path="/" /></template>
       <!-- 面板内容 -->
-      <ul class="goods-list" v-if="home.goodsList.length > 0">
-        <li v-for="item in home.goodsList" :key="item.id">
-          <RouterLink to="/">
-            <img v-lazy="item.picture" alt="" />
-            <p class="name ellipsis">{{ item.name }}</p>
-            <p class="price">&yen;{{ item.price }}</p>
-          </RouterLink>
-        </li>
-      </ul>
-      <div class="home-skeleton" v-else>
-        <div class="item" v-for="i in 4" :key="i" :style="{ backgroundColor: '#f0f9f4' }">
-          <XtxSkeleton bg="#e4e4e4" :width="306" :height="306" />
-          <XtxSkeleton bg="#e4e4e4" :width="160" :height="24" />
-          <XtxSkeleton bg="#e4e4e4" :width="120" :height="24" />
+      <Transition name="fade">
+        <ul class="goods-list" v-if="home.goodsList.length > 0">
+          <li v-for="item in home.goodsList" :key="item.id">
+            <RouterLink to="/">
+              <img v-lazy="item.picture" alt="" />
+              <p class="name ellipsis">{{ item.name }}</p>
+              <p class="price">&yen;{{ item.price }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+        <div class="home-skeleton" v-else>
+          <div class="item" v-for="i in 4" :key="i" :style="{ backgroundColor: '#f0f9f4' }">
+            <XtxSkeleton bg="#e4e4e4" :width="306" :height="306" />
+            <XtxSkeleton bg="#e4e4e4" :width="160" :height="24" />
+            <XtxSkeleton bg="#e4e4e4" :width="120" :height="24" />
+          </div>
         </div>
-      </div>
+      </Transition>
     </HomePanel>
   </div>
 </template>
