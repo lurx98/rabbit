@@ -1,7 +1,8 @@
 <script setup lang="ts" name="TopCategory">
-import { reactive, ref, watch, watchEffect } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import useStore from '../../store/index'
+import { CategoryItem } from '@/types/data'
 import GoodsItem from './components/GoodsItem.vue'
 const route = useRoute()
 const { category, home } = useStore()
@@ -24,6 +25,19 @@ watchEffect(() => {
     category.getTopCategory(id)
   }
 })
+const bread = computed(() => {
+  console.log('111')
+  const id = route.params.id as string
+  const obj = {
+    top: {} as CategoryItem
+  }
+  category?.list.forEach(item => {
+    if (item.id === id) {
+      obj.top = item
+    }
+  })
+  return obj
+})
 </script>
 
 <template>
@@ -32,7 +46,7 @@ watchEffect(() => {
       <!-- 渲染面包屑导航 -->
       <XtxBread>
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem>分类</XtxBreadItem>
+        <XtxBreadItem>{{ bread.top.name }}</XtxBreadItem>
       </XtxBread>
       <XtxCarousel :slides="home.bannerList" style="height: 500px" auto-play />
       <!-- 所有二级分类 -->
