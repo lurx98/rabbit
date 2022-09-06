@@ -3,6 +3,7 @@ import { reactive, ref, watchEffect } from 'vue'
 import useStore from '../../store/index'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
+import GoodsImages from './components/GoodsImages.vue'
 const route = useRoute()
 const { goods } = useStore()
 watchEffect(() => {
@@ -18,12 +19,19 @@ const { info } = storeToRefs(goods)
       <!-- 面包屑 -->
       <XtxBread>
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem to="/">{{ info.categories[1].name }}</XtxBreadItem>
-        <XtxBreadItem to="/">{{ info.categories[0].name }}</XtxBreadItem>
-        <XtxBreadItem to="/">{{ info.name }}</XtxBreadItem>
+        <XtxBreadItem :to="`/category/${info.categories[1].id}`">{{ info.categories[1].name }}</XtxBreadItem>
+        <XtxBreadItem :to="`/category/sub/${info.categories[0].id}`">
+          {{ info.categories[0].name }}
+        </XtxBreadItem>
+        <XtxBreadItem>{{ info.name }}</XtxBreadItem>
       </XtxBread>
       <!-- 商品信息 -->
-      <div class="goods-info"></div>
+      <div class="goods-info">
+        <div class="media">
+          <GoodsImages :images="info.mainPictures" />
+        </div>
+        <div class="spec"></div>
+      </div>
       <!-- 商品详情 -->
       <div class="goods-footer">
         <div class="goods-article">
