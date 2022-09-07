@@ -34,7 +34,7 @@ const { info } = storeToRefs(goods)
           <GoodsSales />
         </div>
         <div class="spec">
-          <GoodsName :goods="info" />
+          <GoodsName ref="target" :goods="info" />
         </div>
       </div>
       <!-- 商品详情 -->

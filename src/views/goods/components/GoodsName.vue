@@ -1,7 +1,12 @@
 <script setup lang="ts" name="GoodsName">
 import { reactive, ref } from 'vue'
-import { GoodsInfo } from '@/types/data'
+import { GoodsInfo, CityResult } from '@/types/data'
 defineProps<{ goods: GoodsInfo }>()
+const userAddress = ref('江西省 九江市 不知道县')
+const changeCity = (val: CityResult) => {
+  console.log(val)
+  userAddress.value = val.provinceName + ' ' + val.cityName + ' ' + val.countyName
+}
 </script>
 
 <template>
@@ -18,7 +23,10 @@ defineProps<{ goods: GoodsInfo }>()
     </dl>
     <dl>
       <dt>配送</dt>
-      <dd>至</dd>
+      <dd>
+        至
+        <XtxCity :user-address="userAddress" @changeCity="changeCity" />
+      </dd>
     </dl>
     <dl>
       <dt>服务</dt>
