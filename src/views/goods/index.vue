@@ -7,6 +7,8 @@ import GoodsImages from './components/GoodsImages.vue'
 import GoodsSales from './components/GoodsSales.vue'
 import GoodsName from './components/GoodsName.vue'
 import GoodsSku from './components/GoodsSku.vue'
+import GoodsDetail from './components/GoodsDetail.vue'
+import GoodsHot from './components/GoodsHot.vue'
 const route = useRoute()
 const { goods } = useStore()
 watchEffect(() => {
@@ -56,10 +58,16 @@ const count = ref(1)
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <div class="goods-tabs"></div>
+          <div class="goods-tabs">
+            <GoodsDetail :goods="info" />
+          </div>
         </div>
         <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <div class="goods-aside">
+          <GoodsHot :type="1" />
+          <GoodsHot :type="2" />
+          <GoodsHot :type="3" />
+        </div>
       </div>
     </div>
   </div>
