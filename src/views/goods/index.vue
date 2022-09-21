@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router'
 import GoodsImages from './components/GoodsImages.vue'
 import GoodsSales from './components/GoodsSales.vue'
 import GoodsName from './components/GoodsName.vue'
+import GoodsSku from './components/GoodsSku.vue'
 const route = useRoute()
 const { goods } = useStore()
 watchEffect(() => {
@@ -13,6 +14,17 @@ watchEffect(() => {
   goods.getGoodsInfo(id)
 })
 const { info } = storeToRefs(goods)
+const changeSku = (skuId: string) => {
+  // console.log(skuId)
+  console.log(skuId)
+  const sku = info.value.skus.find(item => item.id === skuId)
+  if (sku) {
+    info.value.inventory = sku.inventory
+    info.value.price = sku.price
+    info.value.oldPrice = sku.oldPrice
+  }
+}
+const count = ref(1)
 </script>
 
 <template>
@@ -35,6 +47,9 @@ const { info } = storeToRefs(goods)
         </div>
         <div class="spec">
           <GoodsName ref="target" :goods="info" />
+          <GoodsSku :goods="info" skuId="1369155864430120962" @changeSku="changeSku" />
+          <XtxNumbox :max="info.inventory" isLabel v-model:modelValue="count" />
+          <XtxButton type="primary" style="margin-top: 20px">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品详情 -->
